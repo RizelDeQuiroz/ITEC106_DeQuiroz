@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock Paper Scissors</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h1 {
+        font-size: 3.5rem;
+        color: black;
+    }
+    .choices {
+        margin-bottom: 30px;
+    }
+    .choices button {
+        font-size: 7.5rem;
+        min-width: 160px;
+        margin: 0;
+        border-radius: 250px;
+        background-color: blue;
+        cursor: pointer;
+        transition: background-color 0.5s ease;
+    }
+    .choices button:hover {
+        background-color: lightblue;
+    }
+    #playerDisplay, #computerDisplay {
+        font-size: 2.5rem;
+    }
+    #resultDisplay {
+        font-size: 5rem;
+        margin: 30px 0;
+    }
+    .tie { color: orange; }
+    .win { color: green; }
+    .lose { color: red; }
+</style>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <div class="choices">
+        <button onclick="playGame('Rock')">✊</button>
+        <button onclick="playGame('Paper')">🖐</button>
+        <button onclick="playGame('Scissors')">✌</button>
+    </div>
+    <div id="playerDisplay"></div>
+    <div id="computerDisplay"></div>
+    <div id="resultDisplay"></div>
+
+    <script>
+        function playGame(playerChoice) {
+            const choices = ['Rock', 'Paper', 'Scissors'];
+            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+            let resultMessage;
+
+            if (playerChoice === computerChoice) {
+                resultMessage = "<span class='tie'>IT'S A TIE!</span>";
+            } else if (
+                (playerChoice === 'Rock' && computerChoice === 'Scissors') ||
+                (playerChoice === 'Paper' && computerChoice === 'Rock') ||
+                (playerChoice === 'Scissors' && computerChoice === 'Paper')
+            ) {
+                resultMessage = "<span class='win'>YOU WIN!</span>";
+            } else {
+                resultMessage = "<span class='lose'>COMPUTER WINS!</span>";
+            }
+
+            document.getElementById('playerDisplay').innerText = `PLAYER:  ${playerChoice}`;
+            document.getElementById('computerDisplay').innerText = `COMPUTER: ${computerChoice}`;
+            document.getElementById('resultDisplay').innerHTML = resultMessage;
+        }
+    </script>
+</body>
+</html>
