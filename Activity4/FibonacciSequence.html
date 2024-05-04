@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fibonacci Sequence</title>
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  text-align: center;
+  margin: 50px auto;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+
+.input-container {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+button {
+  width: calc(50% - 10px);
+  padding: 10px;
+  font-size: 20px;
+  color: black;
+  background-color: yellow;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top:40px;
+  border: 2px solid black;
+}
+
+button:hover {
+  background-color: #yellow;
+}
+
+#fibonacciResult {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.error {
+  color: #black;
+  margin-top: 10px;
+}
+
+</style>
+
+</head>
+<body>
+<div class="container">
+  <h1>Fibonacci Sequence</h1>
+  <label for="numTerms">Enter a number: (Note: Less than 100)</label>
+  <input type="text" id="numTerms" placeholder="Enter a number">
+  <button onclick="generateFibonacci()">Generate</button>
+  <div id="fibonacciResult"></div>
+</div>
+
+</body>
+<script>
+  function isInteger(num) {
+  return /^\d+$/.test(num);
+}
+
+function generateFibonacci() {
+  let numTermsInput = document.getElementById("numTerms").value.trim();
+  let resultDiv = document.getElementById("fibonacciResult");
+
+  if (!isInteger(numTermsInput) || parseInt(numTermsInput) >= 100) {
+    resultDiv.textContent = "Error: Please enter a number less than 100.";
+    resultDiv.classList.add("error");
+    return;
+  }
+
+  let numTerms = parseInt(numTermsInput);
+  let fibSeries = [];
+
+  if (numTerms <= 0) {
+    resultDiv.textContent = "Error: Please enter a positive integer.";
+    resultDiv.classList.add("error");
+    return;
+  } else if (numTerms === 1) {
+    fibSeries.push(0);
+  } else {
+    fibSeries = [0, 1];
+    for (var i = 2; i < numTerms; i++) {
+      fibSeries.push(fibSeries[i - 1] + fibSeries[i - 2]);
+    }
+  }
+
+  resultDiv.textContent = "Fibonacci series with " + numTerms + " terms: " + fibSeries.join(", ");
+  resultDiv.classList.remove("error");
+}
+
+</script>
+</html>
